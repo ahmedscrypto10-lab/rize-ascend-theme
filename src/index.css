@@ -2,95 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* RIZE Design System - Premium Streetwear Aesthetic 
+Brand: Minimalist, modern, energetic
+Target: Gen Z & Millennials (18-35)
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* RIZE Core Brand Colors */
+    --rize-dark: 145 26% 15%;        /* #1e3324 - Primary Dark */
+    --rize-accent: 78 90% 75%;       /* #c6f781 - Electric Lime */
+    --rize-light: 210 20% 98%;       /* #F8F9FA - Off-White */
+    --rize-pure: 0 0% 100%;          /* Pure White */
+    --rize-black: 0 0% 0%;           /* Pure Black */
+    
+    /* Semantic Color Mapping */
+    --background: var(--rize-pure);
+    --foreground: var(--rize-dark);
+    
+    --card: var(--rize-pure);
+    --card-foreground: var(--rize-dark);
+    
+    --popover: var(--rize-pure);
+    --popover-foreground: var(--rize-dark);
+    
+    --primary: var(--rize-dark);
+    --primary-foreground: var(--rize-pure);
+    
+    --secondary: var(--rize-light);
+    --secondary-foreground: var(--rize-dark);
+    
+    --accent: var(--rize-accent);
+    --accent-foreground: var(--rize-dark);
+    
+    --muted: var(--rize-light);
+    --muted-foreground: 145 26% 45%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--rize-pure);
+    
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: var(--rize-accent);
+    
+    --radius: 0.375rem;
+    
+    /* RIZE Premium Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--rize-dark)), hsl(145 26% 20%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--rize-accent)), hsl(78 90% 85%));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--rize-dark)), hsl(145 26% 10%));
+    
+    /* RIZE Shadow System */
+    --shadow-sm: 0 2px 4px hsl(var(--rize-dark) / 0.1);
+    --shadow-md: 0 4px 12px hsl(var(--rize-dark) / 0.15);
+    --shadow-lg: 0 8px 32px hsl(var(--rize-dark) / 0.2);
+    --shadow-glow: 0 0 20px hsl(var(--rize-accent) / 0.4);
+    
+    /* RIZE Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* RIZE Dark Mode */
+    --background: var(--rize-dark);
+    --foreground: var(--rize-pure);
+    
+    --card: var(--rize-dark);
+    --card-foreground: var(--rize-pure);
+    
+    --popover: var(--rize-dark);
+    --popover-foreground: var(--rize-pure);
+    
+    --primary: var(--rize-accent);
+    --primary-foreground: var(--rize-dark);
+    
+    --secondary: 145 26% 20%;
+    --secondary-foreground: var(--rize-pure);
+    
+    --muted: 145 26% 20%;
+    --muted-foreground: 145 26% 70%;
+    
+    --accent: var(--rize-accent);
+    --accent-foreground: var(--rize-dark);
+    
+    --border: 145 26% 25%;
+    --input: 145 26% 25%;
   }
 }
 
@@ -100,6 +98,33 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* RIZE Typography System */
+  .font-inter {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  /* RIZE Component Utilities */
+  .rize-hero-bg {
+    background: var(--gradient-hero);
+  }
+  
+  .rize-accent-bg {
+    background: var(--gradient-accent);
+  }
+  
+  .rize-shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .rize-transition {
+    transition: var(--transition-smooth);
+  }
+  
+  .rize-bounce {
+    transition: var(--transition-bounce);
   }
 }
