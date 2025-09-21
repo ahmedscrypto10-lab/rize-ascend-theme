@@ -1,0 +1,40 @@
+{%- comment -%}
+  The 404 template is rendered when a user visits a URL that doesn't exist.
+{%- endcomment -%}
+
+<div class="page-width">
+  <div class="template-404">
+    <div class="template-404__content">
+      <h1 class="template-404__title">{{ 'templates.404.title' | t }}</h1>
+      <p class="template-404__text">{{ 'templates.404.subtext' | t }}</p>
+      <a href="{{ routes.root_url }}" class="button">
+        {{ 'general.continue_shopping' | t }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .template-404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+  }
+
+  .template-404__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: hsl(var(--color-rize-dark));
+    margin-bottom: 1rem;
+  }
+
+  .template-404__text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    color: hsla(var(--color-rize-dark), 0.7);
+    margin-bottom: 2rem;
+  }
+</style>

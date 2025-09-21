@@ -1,0 +1,156 @@
+/* RIZE Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reset and Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: hsl(var(--color-rize-dark));
+  background: hsl(var(--color-rize-pure));
+}
+
+/* Page width container */
+.page-width {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .page-width {
+    padding: 0 3rem;
+  }
+}
+
+/* Buttons */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem 2.4rem;
+  background: hsl(var(--color-rize-accent));
+  color: hsl(var(--color-rize-dark));
+  font-family: 'Inter', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px hsla(var(--color-rize-accent), 0.4);
+}
+
+/* Section spacing */
+.section {
+  padding: 4rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .section {
+    padding: 6rem 0;
+  }
+}
+
+/* Utility classes */
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  word-wrap: normal !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Focus styles */
+.focus-inset:focus-visible {
+  outline: 2px solid hsl(var(--color-rize-accent));
+  outline-offset: 2px;
+}
+
+/* List reset */
+.list-unstyled {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Link reset */
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Responsive images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Header specific styles */
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.header__inline-menu {
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .header__inline-menu {
+    display: block;
+  }
+}
+
+.list-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 3rem;
+}
+
+.header__icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Menu drawer */
+.menu-drawer-container .header__icon {
+  display: block;
+}
+
+@media screen and (min-width: 990px) {
+  .menu-drawer-container .header__icon {
+    display: none;
+  }
+}

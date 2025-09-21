@@ -1,0 +1,368 @@
+{{ 'section-rize-collections.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rize-collections {
+    background: hsla(var(--color-rize-light), 0.3);
+  }
+
+  .rize-collections__header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: rizeSlideUp 0.8s ease-out;
+  }
+
+  .rize-collections__title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: hsl(var(--color-rize-dark));
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .rize-collections__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    color: hsla(var(--color-rize-dark), 0.7);
+    max-width: 50rem;
+    margin: 0 auto;
+  }
+
+  .rize-collections__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .rize-collections__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .rize-collections__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .rize-collection-card {
+    position: relative;
+    background: hsl(var(--color-rize-pure));
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 12px hsla(var(--color-rize-dark), 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: rizeScaleIn 0.6s ease-out;
+  }
+
+  .rize-collection-card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 8px 25px hsla(var(--color-rize-dark), 0.15);
+  }
+
+  .rize-collection-card__image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .rize-collection-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .rize-collection-card:hover .rize-collection-card__image {
+    transform: scale(1.05);
+  }
+
+  .rize-collection-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to top,
+      hsla(var(--color-rize-dark), 0.9),
+      hsla(var(--color-rize-dark), 0.4),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+  }
+
+  .rize-collection-card:hover .rize-collection-card__overlay {
+    opacity: 1;
+  }
+
+  .rize-collection-card__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2.4rem;
+    background: hsl(var(--color-rize-accent));
+    color: hsl(var(--color-rize-dark));
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0.6rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rize-collection-card__button:hover {
+    background: hsl(var(--color-rize-accent));
+    transform: translateX(0.5rem);
+  }
+
+  .rize-collection-card__content {
+    padding: 2rem;
+  }
+
+  .rize-collection-card__category {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: hsl(var(--color-rize-accent));
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .rize-collection-card__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: hsl(var(--color-rize-dark));
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .rize-collection-card__description {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: hsla(var(--color-rize-dark), 0.7);
+  }
+
+  @keyframes rizeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(4rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rizeScaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="rize-collections section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="rize-collections__header">
+      {%- if section.settings.title != blank -%}
+        <h2 class="rize-collections__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="rize-collections__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="rize-collections__grid">
+      {%- for block in section.blocks -%}
+        <div class="rize-collection-card" style="animation-delay: {{ forloop.index0 | times: 0.1 }}s;">
+          {%- if block.settings.image -%}
+            <div class="rize-collection-card__image-wrapper">
+              <img
+                src="{{ block.settings.image | image_url: width: 800 }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                class="rize-collection-card__image"
+                loading="lazy"
+                width="800"
+                height="800"
+              >
+              <div class="rize-collection-card__overlay">
+                {%- if block.settings.link -%}
+                  <a href="{{ block.settings.link }}" class="rize-collection-card__button">
+                    Shop Collection
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.33334 8H12.6667M12.6667 8L8.66668 4M12.6667 8L8.66668 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          <div class="rize-collection-card__content">
+            {%- if block.settings.category != blank -%}
+              <div class="rize-collection-card__category">{{ block.settings.category }}</div>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="rize-collection-card__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="rize-collection-card__description">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZE Featured Collections",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Collections",
+      "label": "Section title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "Each collection tells a story. Find yours.",
+      "label": "Section subtitle"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Collection image"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "default": "Core Pieces",
+          "label": "Category"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Essential",
+          "label": "Collection title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "default": "Timeless streetwear essentials that define your everyday style",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZE Featured Collections",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            "category": "Core Pieces",
+            "title": "Essential",
+            "description": "Timeless streetwear essentials that define your everyday style"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "category": "City Life",
+            "title": "Urban",
+            "description": "Built for the streets, designed for the hustle"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "category": "Premium Line",
+            "title": "Limitless",
+            "description": "Exclusive pieces for those who demand excellence"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

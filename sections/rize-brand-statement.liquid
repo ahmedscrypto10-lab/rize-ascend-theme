@@ -1,0 +1,249 @@
+{{ 'section-rize-brand-statement.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .rize-brand-statement {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--color-rize-dark)),
+      hsla(var(--color-rize-dark), 0.95)
+    );
+    color: hsl(var(--color-rize-pure));
+  }
+
+  .rize-brand-statement__content {
+    text-align: center;
+    animation: rizeFadeIn 1s ease-out;
+  }
+
+  .rize-brand-statement__title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .rize-brand-statement__title-accent {
+    color: hsl(var(--color-rize-accent));
+  }
+
+  .rize-brand-statement__text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 4rem;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+  }
+
+  .rize-brand-statement__stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .rize-brand-statement__stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .rize-brand-statement__stat {
+    text-align: center;
+    animation: rizeSlideUp 0.8s ease-out;
+  }
+
+  .rize-brand-statement__stat-number {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 5vw, 4rem);
+    font-weight: 900;
+    color: hsl(var(--color-rize-accent));
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .rize-brand-statement__stat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @keyframes rizeFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rizeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="rize-brand-statement section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="rize-brand-statement__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="rize-brand-statement__title">
+          {%- assign heading_parts = section.settings.heading | split: '|' -%}
+          {%- if heading_parts.size > 1 -%}
+            {{ heading_parts.first }}
+            <span class="rize-brand-statement__title-accent">{{ heading_parts.last }}</span>
+          {%- else -%}
+            {{ section.settings.heading }}
+          {%- endif -%}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p class="rize-brand-statement__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="rize-brand-statement__stats">
+          {%- for block in section.blocks -%}
+            <div class="rize-brand-statement__stat" style="animation-delay: {{ forloop.index0 | times: 0.1 }}s;">
+              {%- if block.settings.number != blank -%}
+                <span class="rize-brand-statement__stat-number">{{ block.settings.number }}</span>
+              {%- endif -%}
+              {%- if block.settings.label != blank -%}
+                <span class="rize-brand-statement__stat-label">{{ block.settings.label }}</span>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RIZE Brand Statement",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Built for Movement.|Designed for the Moment.",
+      "label": "Heading",
+      "info": "Use | to separate the regular text from the accent text"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "default": "At RIZE, we believe that true style comes from authentic expression. Every piece is crafted for those who refuse to settle, who push boundaries, and who understand that your ascent is your own.",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "default": "100%",
+          "label": "Number"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "default": "Premium Materials",
+          "label": "Label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RIZE Brand Statement",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "label": "Premium Materials"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "24/7",
+            "label": "Comfort Promise"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "∞",
+            "label": "Limitless Potential"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
